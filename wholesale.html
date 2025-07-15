@@ -23,7 +23,7 @@
                 </a>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
-                    <li class="dropdown">
+                    <li class="nav-services-desktop dropdown">
                         <a href="#" class="dropbtn">Services <i class="fas fa-chevron-down" style="font-size: 12px;"></i></a>
                         <ul class="dropdown-content">
                             <li><a href="wholesale.html">Wholesale E-commerce</a></li>
@@ -34,6 +34,13 @@
                             <li><a href="business.html">Business Solutions</a></li>
                         </ul>
                     </li>
+                    <!-- Mobile: show all service links directly -->
+                    <li class="nav-services-mobile"><a href="wholesale.html">Wholesale E-commerce</a></li>
+                    <li class="nav-services-mobile"><a href="retail.html">Multi-Channel Retail</a></li>
+                    <li class="nav-services-mobile"><a href="import-export.html">Import/Export</a></li>
+                    <li class="nav-services-mobile"><a href="logistics.html">Logistics</a></li>
+                    <li class="nav-services-mobile"><a href="technology.html">Technology Partnerships</a></li>
+                    <li class="nav-services-mobile"><a href="business.html">Business Solutions</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <div class="mobile-menu">
@@ -132,10 +139,31 @@
         </div>
     </footer>
     <script>
+        // Universal nav JS
         document.querySelector('.mobile-menu').addEventListener('click', function () {
             const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.classList.toggle('show');
         });
+        // Hide mobile menu after clicking any nav link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function () {
+                if (window.innerWidth < 768) {
+                    document.querySelector('.nav-links').classList.remove('show');
+                }
+            });
+        });
+        // Only show desktop dropdown on desktop
+        function handleNavDisplay() {
+            if (window.innerWidth < 768) {
+                document.querySelectorAll('.nav-services-desktop').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.nav-services-mobile').forEach(el => el.style.display = 'block');
+            } else {
+                document.querySelectorAll('.nav-services-desktop').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.nav-services-mobile').forEach(el => el.style.display = 'none');
+            }
+        }
+        window.addEventListener('resize', handleNavDisplay);
+        window.addEventListener('DOMContentLoaded', handleNavDisplay);
     </script>
 </body>
 </html> 

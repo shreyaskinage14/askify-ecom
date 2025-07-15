@@ -631,12 +631,56 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .nav-links {
+    .navbar {
+        flex-wrap: wrap;
+    }
+    .logo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .logo h1 > div {
         display: none;
     }
-
+    .logo img {
+        margin-right: 0 !important;
+    }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%; /* Changed from 100vw to 100% */
+        background: #fff;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        z-index: 1002;
+        padding: 24px 0 16px 0;
+        border-radius: 0 0 16px 16px;
+    }
+    .nav-links.show {
+        display: flex !important;
+    }
+    .nav-links li {
+        margin: 0 0 18px 0;
+        text-align: center;
+    }
+    .nav-links a {
+        font-size: 18px;
+        padding: 12px 0;
+        color: var(--dark);
+    }
     .mobile-menu {
         display: block;
+        font-size: 28px;
+        position: absolute;
+        right: 12px;
+        top: 20px;
+        padding: 4px 8px;
+        z-index: 1100;
+    }
+    .navbar {
+        position: relative;
     }
 
     .cta-btns {
@@ -667,20 +711,147 @@ footer {
     .services-swiper .swiper-button-prev {
         left: -10px;
     }
+    /* Hide dropdown arrow and dropdown-content in mobile */
+    .nav-links .dropdown .dropbtn i {
+        display: none;
+    }
+    .nav-links .dropdown-content {
+        display: none !important;
+    }
+    /* Show all service links as regular nav links in mobile */
+    .nav-links .dropdown {
+        position: static;
+    }
+    .nav-links .dropdown .dropbtn {
+        pointer-events: none;
+        color: var(--dark);
+        background: none;
+        border: none;
+        font-size: 18px;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        display: none;
+    }
+    .nav-links .dropdown-content a {
+        display: block;
+        padding: 12px 0;
+        color: var(--dark);
+        font-size: 18px;
+        border: none;
+        background: none;
+        text-align: center;
+        width: 100%;
+    }
+    .nav-links .dropdown-content {
+        display: block !important;
+        position: static;
+        box-shadow: none;
+        background: none;
+        min-width: 0;
+        padding: 0;
+        border-radius: 0;
+        width: 100%;
+    }
+    .nav-links .dropdown {
+        width: 100%;
+    }
 }
 
 @media (max-width: 576px) {
-    .section-title h2 {
-        font-size: 2rem;
-    }
+  /* Swiper carousel appearance */
+  .swiper,
+  .services-swiper,
+  .features-swiper {
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(37, 99, 235, 0.08);
+    background: #fff;
+    margin-bottom: 24px;
+  }
+  .swiper-slide {
+    padding: 0 2px;
+  }
+  .service-card, .feature-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(37, 99, 235, 0.08);
+    margin: 0 2px;
+  }
+  /* Navbar dropdown fix */
+  .nav-links .dropdown-content {
+    display: none !important;
+    position: static;
+    box-shadow: none;
+    background: #fff;
+    min-width: 0;
+    padding: 0;
+    border-radius: 0 0 12px 12px;
+    width: 100%;
+  }
+  .nav-links.show .dropdown-content,
+  .nav-links .dropdown.open .dropdown-content {
+    display: block !important;
+    width: 100%;
+    position: static;
+    box-shadow: none;
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    z-index: 1002;
+  }
+  .nav-links .dropdown-content a {
+    padding: 14px 24px;
+    font-size: 17px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .nav-links .dropdown-content a:last-child {
+    border-bottom: none;
+  }
+  .nav-links .dropbtn {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 14px 24px;
+    font-size: 18px;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .service-card p,
+  .feature-card p {
+    font-size: 0.97rem;
+    line-height: 1.5;
+  }
+  .service-card h3,
+  .feature-card h3 {
+    font-size: 1.1rem;
+  }
+  .swiper-pagination {
+    position: static !important;
+    margin-top: 18px !important;
+    margin-bottom: 0 !important;
+    text-align: center;
+  }
+}
 
-    .cta h2 {
-        font-size: 2.2rem;
-    }
-
-    .logo h1 {
-        font-size: 22px;
-    }
+@media (max-width: 400px) {
+  .hero-image img {
+    max-width: 220px;
+  }
+  .logo h1 {
+    font-size: 16px;
+  }
+  .btn, .btn-outline {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  .service-card, .feature-card {
+    padding: 10px 4px 10px 4px;
+  }
+  .footer-col h3 {
+    font-size: 1rem;
+  }
 } 
 
 .swiper, .services-swiper, .swiper-slide {
@@ -701,4 +872,27 @@ footer {
     background: none;
     display: block;
     margin: 0 auto;
+} 
+
+html, body {
+  overflow-x: hidden !important;
+} 
+
+.swiper,
+.services-swiper,
+.features-swiper {
+  position: relative;
+  padding-bottom: 38px;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+.swiper-pagination {
+  position: absolute !important;
+  left: 0;
+  bottom: 10px;
+  width: 100%;
+  margin: 0 !important;
+  text-align: center;
+  z-index: 10;
 } 
